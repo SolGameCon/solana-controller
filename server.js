@@ -238,7 +238,8 @@ io.on('connection', (socket) => {
 app.get('/config', (req, res) => {
     res.json({
         RPC_URL: process.env.RPC_URL || 'https://api.mainnet-beta.solana.com',
-        TOKEN_MINT_ADDRESS : process.env.TOKEN_MINT_ADDRESS
+        TOKEN_MINT_ADDRESS: process.env.TOKEN_MINT_ADDRESS,
+        gameName: process.env.gameName || 'Pokemon Red' // Add game name with fallback
     });
 });
 
