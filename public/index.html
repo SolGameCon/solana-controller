@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Stream</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Solana web3 dependencies -->
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <script src="https://unpkg.com/@solana/spl-token@latest/lib/index.iife.min.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="button-container">
+            <button class="pumpfun-btn">💊</button>
+            <button class="about-btn">❓</button>
+            <button class="twitter-btn">🐦</button>
+            <button class="connect-btn">Connect</button>
+        </div>
+
+        <div class="social-container">
+            <!-- Social content will go here -->
+        </div>
+
+        <div class="video-container">
+            <script>
+                const domain = window.location.hostname;
+                const twitchEmbed = document.createElement('iframe');
+                twitchEmbed.src = `https://player.twitch.tv/?channel=pokepump&parent=${domain}`;
+                twitchEmbed.frameborder = "0";
+                twitchEmbed.allowfullscreen = true;
+                twitchEmbed.scrolling = "no";
+                twitchEmbed.height = "100%";
+                twitchEmbed.width = "100%";
+                document.querySelector('.video-container').appendChild(twitchEmbed);
+            </script>
+        </div>
+
+        <div class="input-history">
+            <!-- Chat messages and button presses will appear here -->
+        </div>
+
+        <div class="controller">
+            <div class="status-light"></div>
+            
+            <!-- D-Pad -->
+            <div class="dpad">
+                <button class="up">▲</button>
+                <button class="left">◄</button>
+                <button class="right">►</button>
+                <button class="down">▼</button>
+            </div>
+
+            <!-- Start/Select buttons -->
+            <div class="center-buttons">
+                <button class="select">SELECT</button>
+                <button class="start">START</button>
+            </div>
+
+            <!-- A/B buttons -->
+            <div class="action-buttons">
+                <button class="b">B</button>
+                <button class="a">A</button>
+            </div>
+
+            <!-- Add chat input container -->
+            <div class="chat-input-container">
+                <input type="text" 
+                       maxlength="120" 
+                       placeholder="Type your message..." 
+                       class="chat-input"
+                       id="chatInput">
+                <button class="chat-send">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
+

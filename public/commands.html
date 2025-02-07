@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command History</title>
+    <meta http-equiv="refresh" content="2">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: monospace;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: flex-end;
+        }
+        .history-entry {
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(68, 68, 68, 0.5);
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .button-name {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        // Always scroll to bottom on load
+        window.onload = function() {
+            window.scrollTo(0, document.body.scrollHeight);
+        };
+    </script>
+</head>
+<body>
+    <!-- Entries will be appended here -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const inputHistoryContainer = document.querySelector('.input-history');
+
+        function addInputToHistory(input) {
+            const entry = document.createElement('div');
+            entry.className = 'history-entry';
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const buttonAction = getButtonAction(input.button);
+            
+            entry.innerHTML = `
+                <span class="timestamp">${timestamp}</span>
+                <strong>${input.userId.startsWith('anon_') ? input.userId.slice(0, 9) : input.userId}</strong> 
+                ${buttonAction}`;
+            
+            inputHistoryContainer.insertBefore(entry, inputHistoryContainer.firstChild);
+            
+            // Keep only last 50 entries in DOM
+            const maxEntries = 50;
+            while (inputHistoryContainer.children.length > maxEntries) {
+                inputHistoryContainer.removeChild(inputHistoryContainer.lastChild);
+            }
+        }
+
+        function getButtonAction(button) {
+            switch(button.toLowerCase()) {
+                case 'a': return 'pressed <span class="button-name">A</span>!';
+                case 'b': return 'pressed <span class="button-name">B</span>!';
+                case 'start': return 'pressed <span class="button-name">START</span>!';
+                case 'select': return 'pressed <span class="button-name">SELECT</span>!';
+                case 'up': return 'pressed <span class="button-name">▲</span>!';
+                case 'down': return 'pressed <span class="button-name">▼</span>!';
+                case 'left': return 'pressed <span class="button-name">◄</span>!';
+                case 'right': return 'pressed <span class="button-name">►</span>!';
+                default: return `pressed <span class="button-name">${button}</span>!`;
+            }
+        }
+
+        // Handle initial history
+        socket.on('input_history', (history) => {
+            inputHistoryContainer.innerHTML = '';
+            history.forEach(input => addInputToHistory(input));
+        });
+
+        // Handle new inputs
+        socket.on('new_input', (input) => {
+            addInputToHistory(input);
+        });
+    </script>
+</body>
+</html>
