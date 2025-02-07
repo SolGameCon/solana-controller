@@ -38,8 +38,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Connect with Us 🌍
 - GitHub: [SolGameCon](https://github.com/SolGameCon/solana-controller)
-- Twitter: [@yourhandle](https://twitter.com/solana_gc)
-- Website: [yourwebsite.com](https://solanagc.fun)
+- Twitter: [@Solana_GC](https://twitter.com/solana_gc)
+- Website: [SolanaGC.fun](https://solanagc.fun)
 
 Enjoy the game and happy playing! 🎮🚀
 
