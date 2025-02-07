@@ -5,6 +5,10 @@ Welcome to **Solana Game Controller**! This is a collectively controlled game of
 
 Everything you need to make your own input system can be found in this repository.
 
+Visit https://solanagc.fun to try the demo. 500,000 GCB required.
+ca: EnShCMbrRK2DfNXwqisTrF74eVBHah6yLFwWVYFCpump
+https://pump.fun/EnShCMbrRK2DfNXwqisTrF74eVBHah6yLFwWVYFCpump
+
 ## How It Works 🚀
 To participate, you need to hold at least **500,000 SGC tokens** in your connected **Phantom** or **Solflare** wallet.
 
